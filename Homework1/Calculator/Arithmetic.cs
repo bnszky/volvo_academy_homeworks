@@ -8,9 +8,9 @@ namespace Calculator
 {
     internal static class Arithmetic
     {
-        public static double AddTwoNumbers(double a, double b) { return a + b; }
-        public static double SubtractTwoNumbers(double a, double b) { return a - b; }
-        public static double MultiplyTwoNumbers(double a, double b) { return a * b; }
+        public static double AddTwoNumbers(double a, double b) { return Math.Round(a + b, 10); }
+        public static double SubtractTwoNumbers(double a, double b) { return Math.Round(a - b, 10); }
+        public static double MultiplyTwoNumbers(double a, double b) { return Math.Round(a * b, 10); }
         public static double? DivideTwoNumbers(double a, double b)
         {
             if (b == 0)
@@ -18,7 +18,7 @@ namespace Calculator
                 Console.WriteLine("You can't divide by zero!");
                 return null;
             }
-            return a / b;
+            return Math.Round(a / b, 10);
         }
         public static long? FactorialFromN(int n)
         {
