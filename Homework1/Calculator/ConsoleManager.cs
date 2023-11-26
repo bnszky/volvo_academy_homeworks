@@ -1,6 +1,8 @@
-﻿using System;
+﻿using Microsoft.VisualBasic;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Metadata;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -40,6 +42,29 @@ namespace Calculator
             }
 
             return null;
+        }
+
+        public static int? ValidateInput(int? operation, string aString, string bString, out double a, out double b, out int n)
+        {
+            a = 0; b = 0; n = 0;
+            // if isn't possible to parse string set operation to null 
+            if (operation >= 1 && operation <= 4)
+            {
+                if (!double.TryParse(aString, out a)) operation = null;
+                if (!double.TryParse(bString, out b)) operation = null;
+            }
+            else if (operation == 5)
+            {
+                if (aString.Length > 0) operation = null;
+                if (!int.TryParse(bString, out n)) operation = null;
+            }
+            else if (operation == 6)
+            {
+                if (!double.TryParse(aString, out a)) operation = null;
+                if (!int.TryParse(bString, out n)) operation = null;
+            }
+
+            return operation;
         }
         public static int? SelectOperation()
         {

@@ -4,65 +4,33 @@ namespace Calculator
 {
     internal class Program
     {
-        static void Addition()
+        static void Addition(double a, double b)
         {
-            double a, b;
-            if(!ConsoleManager.ReadTwoNumbers(out a, out b)) return;
-
             double result = Arithmetic.AddTwoNumbers(a, b);
             Console.WriteLine($"{a} + {b} = {result}");
         } 
-        static void Subtraction()
+        static void Subtraction(double a, double b)
         {
-            double a, b;
-            if (!ConsoleManager.ReadTwoNumbers(out a, out b)) return;
-
             double result = Arithmetic.SubtractTwoNumbers(a, b);
             Console.WriteLine($"{a} - {b} = {result}");
         }
-        static void Multiplication()
+        static void Multiplication(double a, double b)
         {
-            double a, b;
-            if (!ConsoleManager.ReadTwoNumbers(out a, out b)) return;
-
             double result = Arithmetic.MultiplyTwoNumbers(a, b);
             Console.WriteLine($"{a} * {b} = {result}");
         }
-        static void Division()
+        static void Division(double a, double b)
         {
-            double a, b;
-            if (!ConsoleManager.ReadTwoNumbers(out a, out b)) return;
-
             double? result = Arithmetic.DivideTwoNumbers(a, b);
             if(result != null) Console.WriteLine($"{a} / {b} = {result}");
         }
-        static void Factorial()
+        static void Factorial(int n)
         {
-            int n;
-            Console.WriteLine("Please type number for factorial (only non-negative integer): ");
-            if (!int.TryParse(Console.ReadLine(), out n))
-            {
-                Console.WriteLine("Your input is incorrect!");
-                return;
-            }
-
             long? result = Arithmetic.FactorialFromN(n);
             if (result != null) Console.WriteLine($"{n}! = {result}");
         }
-        static void Exponentation()
+        static void Exponentation(double x, int n)
         {
-            double x; int n;
-            Console.WriteLine("Please type base: ");
-            bool isXDouble = double.TryParse(Console.ReadLine(), out x);
-            Console.WriteLine("Please type exponent (only integer): ");
-            bool isNInt = int.TryParse(Console.ReadLine(), out n);
-
-            if (!isXDouble || !isNInt)
-            {
-                Console.WriteLine("Your input is incorrect!");
-                return;
-            }
-
             double? result = Arithmetic.Power(x, n);
             if (result != null) Console.WriteLine($"{x}^[{n}] = {result}");
         }
@@ -72,36 +40,45 @@ namespace Calculator
             Console.WriteLine("Calculator 1.0 by Michal Banaszkiewicz");
             while (true)
             {
-                int? selected = ConsoleManager.SelectOperation();
-                switch (selected)
+                string? aString, bString;
+                Console.WriteLine("Please type mathematical formula as follow number1*number2. For factorial type !number");
+                Console.WriteLine("For example type: -4,5/-2");
+                Console.WriteLine("You are allowed to add (+), subtract (-), multiply (*), divide (/), exponent (^), factorial (!)");
+                Console.WriteLine("Enter q to quit");
+                string input = Console.ReadLine();
+                int? operation = ConsoleManager.TryParseInput(input, out aString, out bString);
+
+                double a, b;
+                int n;
+
+                ConsoleManager.ValidateInput(operation, aString, bString, out a, out b, out n);
+
+                switch (operation)
                 {
                     case 1:
-                        Addition();
+                        Addition(a, b);
                         break;
                     case 2:
-                        Subtraction();
+                        Subtraction(a, b);
                         break;
                     case 3:
-                        Multiplication();
+                        Multiplication(a, b);
                         break;
                     case 4:
-                        Division();
+                        Division(a, b);
                         break;
                     case 5:
-                        Factorial();
+                        Factorial(n);
                         break;
                     case 6:
-                        Exponentation();
+                        Exponentation(a, n);
                         break;
-                    case 7:
+                    case 0:
                         return;
                     default:
-                        Console.WriteLine("Invalid selection! Try again!");
+                        Console.WriteLine("Invalid input! Try again!");
                         break;
                 }
-
-                Console.WriteLine("Please press any key to continue...");
-                Console.ReadKey();
             }
         }
     }
