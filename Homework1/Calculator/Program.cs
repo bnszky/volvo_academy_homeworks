@@ -4,120 +4,36 @@ namespace Calculator
 {
     internal class Program
     {
-        static int? SelectOperation()
-        {
-            Console.WriteLine("Please select operation by typing corresponding number:");
-            Console.WriteLine("1. Addition");
-            Console.WriteLine("2. Subtraction");
-            Console.WriteLine("3. Multiplication");
-            Console.WriteLine("4. Division");
-            Console.WriteLine("5. Factorial");
-            Console.WriteLine("6. Exponentiation");
-            Console.WriteLine("7. Exit");
-            string input = Console.ReadLine();
-            int number;
-            return (int.TryParse(input, out number) && number >= 1 && number <= 7) ? number : null;
-        }
-
-        static bool ReadTwoNumbers(out double a, out double b)
-        {
-            Console.WriteLine("Please type first number: ");
-            bool isADouble = double.TryParse(Console.ReadLine(), out a);
-            Console.WriteLine("Please type second number: ");
-            bool isBDouble = double.TryParse(Console.ReadLine(), out b);
-
-            if (!isADouble || !isBDouble)
-            {
-                Console.WriteLine("Your input is incorrect!");
-                return false;
-            }
-
-            return true;
-        }
-
-        static double AddTwoNumbers(double a, double b) { return a + b; }
-        static double SubtractTwoNumbers(double a, double b) { return a - b; }
-        static double MultiplyTwoNumbers(double a, double b) { return a * b; }
-        static double? DivideTwoNumbers(double a, double b) {
-            if (b == 0)
-            {
-                Console.WriteLine("You can't divide by zero!");
-                return null;
-            }
-            return a / b;
-        }
-        static long? FactorialFromN(int n)
-        {
-            if (n < 0)
-            {
-                Console.WriteLine("Factorial of negative integer doesn't exist!");
-                return null;
-            }
-            if (n == 0) return 1;
-            return FactorialFromN(n - 1) * n;
-        }
-
-        // Very intuitive implementation of exponentation
-        static double SlowerPower(double x, int n)
-        {
-            double power = 1;
-            while (n-- > 0)
-            {
-                power *= x;
-            }
-            return power;
-        }
-        // Smarter way of exponentation using divide and conquer technique
-        static double SmarterPower(double x, int n)
-        {
-            if (n == 0) return 1;
-            double power = SmarterPower(x, n / 2);
-            power *= power;
-            if (n % 2 == 1) power *= x;
-            return power;
-        }
-        static double? Power(double x, int n)
-        {
-            if (n < 0 && x == 0)
-            {
-                Console.WriteLine("0 to negative exponent is undefined!");
-                return null;
-            }
-
-            double result = SmarterPower(x, Math.Abs(n));
-            if (n < 0) return ((double)1 / result);
-            return result;
-        }
         static void Addition()
         {
             double a, b;
-            if(!ReadTwoNumbers(out a, out b)) return;
+            if(!ConsoleManager.ReadTwoNumbers(out a, out b)) return;
 
-            double result = AddTwoNumbers(a, b);
+            double result = Arithmetic.AddTwoNumbers(a, b);
             Console.WriteLine($"{a} + {b} = {result}");
         } 
         static void Subtraction()
         {
             double a, b;
-            if (!ReadTwoNumbers(out a, out b)) return;
+            if (!ConsoleManager.ReadTwoNumbers(out a, out b)) return;
 
-            double result = SubtractTwoNumbers(a, b);
+            double result = Arithmetic.SubtractTwoNumbers(a, b);
             Console.WriteLine($"{a} - {b} = {result}");
         }
         static void Multiplication()
         {
             double a, b;
-            if (!ReadTwoNumbers(out a, out b)) return;
+            if (!ConsoleManager.ReadTwoNumbers(out a, out b)) return;
 
-            double result = MultiplyTwoNumbers(a, b);
+            double result = Arithmetic.MultiplyTwoNumbers(a, b);
             Console.WriteLine($"{a} * {b} = {result}");
         }
         static void Division()
         {
             double a, b;
-            if (!ReadTwoNumbers(out a, out b)) return;
+            if (!ConsoleManager.ReadTwoNumbers(out a, out b)) return;
 
-            double? result = DivideTwoNumbers(a, b);
+            double? result = Arithmetic.DivideTwoNumbers(a, b);
             if(result != null) Console.WriteLine($"{a} / {b} = {result}");
         }
         static void Factorial()
@@ -130,7 +46,7 @@ namespace Calculator
                 return;
             }
 
-            long? result = FactorialFromN(n);
+            long? result = Arithmetic.FactorialFromN(n);
             if (result != null) Console.WriteLine($"{n}! = {result}");
         }
         static void Exponentation()
@@ -147,7 +63,7 @@ namespace Calculator
                 return;
             }
 
-            double? result = Power(x, n);
+            double? result = Arithmetic.Power(x, n);
             if (result != null) Console.WriteLine($"{x}^[{n}] = {result}");
         }
 
@@ -156,7 +72,7 @@ namespace Calculator
             Console.WriteLine("Calculator 1.0 by Michal Banaszkiewicz");
             while (true)
             {
-                int? selected = SelectOperation();
+                int? selected = ConsoleManager.SelectOperation();
                 switch (selected)
                 {
                     case 1:
