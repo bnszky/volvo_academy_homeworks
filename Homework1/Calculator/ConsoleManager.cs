@@ -33,7 +33,7 @@ namespace Calculator
             if (text.ToLower() == "q") return 0;
 
             char[] signs = { '+', '-', '*', '/', '!', '^' };
-            for(int i = 0; i < signs.Length; i++)
+            for(int i = signs.Length-1; i > 0; i--)
             {
                 if (SplitIfSignExist(text, signs[i], out firstNumber, out secondNumber))
                 {
@@ -55,8 +55,8 @@ namespace Calculator
             }
             else if (operation == 5)
             {
-                if (aString.Length > 0) operation = null;
-                if (!int.TryParse(bString, out n)) operation = null;
+                if (!int.TryParse(aString, out n)) operation = null;
+                if (bString.Length > 0) operation = null;
             }
             else if (operation == 6)
             {
