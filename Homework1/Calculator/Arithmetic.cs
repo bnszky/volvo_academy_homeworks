@@ -32,6 +32,7 @@ namespace Calculator
         }
 
         // Very intuitive implementation of exponentation
+        /*
         private static double SlowerPower(double x, int n)
         {
             double power = 1;
@@ -41,6 +42,8 @@ namespace Calculator
             }
             return power;
         }
+        */
+
         // Smarter way of exponentation using divide and conquer technique
         private static double SmarterPower(double x, int n)
         {
@@ -59,7 +62,7 @@ namespace Calculator
             }
 
             double result = SmarterPower(x, Math.Abs(n));
-            if (n < 0) return ((double)1 / result);
+            if (n < 0) return Math.Round((double)1 / result, 10);
             return result;
         }
     }
