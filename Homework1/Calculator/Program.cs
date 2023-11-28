@@ -41,18 +41,22 @@ namespace Calculator
             while (true)
             {
                 string? aString, bString;
-                Console.WriteLine("Please type mathematical formula as follow number1*number2. For factorial type !number");
-                Console.WriteLine("For example type: -4,5/-2");
+                Console.WriteLine("Please type mathematical formula as follow number1*number2. For factorial type number!");
+                Console.WriteLine("For example type: -4,5/-2 (Warning! You can add and subtract only positive numbers in mathematical string input)");
                 Console.WriteLine("You are allowed to add (+), subtract (-), multiply (*), divide (/), exponent (^), factorial (!)");
-                Console.WriteLine("Enter q to quit");
+                Console.WriteLine("Type q to quit");
+
+                // read input and parse to two strings
                 string input = Console.ReadLine();
                 int? operation = ConsoleManager.TryParseInput(input, out aString, out bString);
 
+                // then validate and parse to double and int
                 double a, b;
                 int n;
 
-                ConsoleManager.ValidateInput(operation, aString, bString, out a, out b, out n);
+                operation = ConsoleManager.ValidateInput(operation, aString, bString, out a, out b, out n);
 
+                // here are all methods. I know it's really long but I'd like to represent it in a readable way.
                 switch (operation)
                 {
                     case 1:
