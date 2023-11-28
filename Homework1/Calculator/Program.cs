@@ -35,9 +35,8 @@ namespace Calculator
             if (result != null) Console.WriteLine($"{x}^[{n}] = {result}");
         }
 
-        static void Main(string[] args)
+        static void ProgramWithStringInput()
         {
-            Console.WriteLine("Calculator 1.0 by Michal Banaszkiewicz");
             while (true)
             {
                 string? aString, bString;
@@ -84,6 +83,26 @@ namespace Calculator
                         break;
                 }
             }
+        }
+
+        static void ProgramWithRandomData()
+        {
+            Random rnd = new Random();
+
+            int a = 1; // minValue
+            int b = 10; // maxValue
+            Addition(rnd.Next(a, b + 1), rnd.Next(a, b + 1));
+            Subtraction(rnd.Next(a, b + 1), rnd.Next(a, b + 1));
+            Multiplication(rnd.Next(a, b + 1), rnd.Next(a, b + 1));
+            Division(rnd.Next(a, b + 1), rnd.Next(a, b + 1));
+            Exponentation(rnd.Next(a, b + 1), rnd.Next(a, b + 1));
+            Factorial(rnd.Next(a, b + 1));
+        }
+
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Calculator 1.0 by Michal Banaszkiewicz");
+            ProgramWithStringInput();
         }
     }
 }
