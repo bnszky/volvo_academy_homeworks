@@ -69,8 +69,7 @@ namespace Calculator
 
             return operation;
         }
-        // these functions are used in previous versions of projects
-        /*
+        // these functions are used in ProgramWithOptions
         public static int? SelectOperation()
         {
             Console.WriteLine("Please select operation by typing corresponding number:");
@@ -101,6 +100,16 @@ namespace Calculator
 
             return true;
         }
-        */
+
+        public static bool ReadOneNumber(out double a)
+        {
+            Console.WriteLine("Please type number: ");
+            if(double.TryParse(Console.ReadLine(), out a)) return true;
+            else
+            {
+                Console.WriteLine("Your input is incorrect!");
+                return false;
+            }
+        }
     }
 }
