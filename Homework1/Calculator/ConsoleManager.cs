@@ -39,7 +39,7 @@ namespace Calculator
             {
                 if (SplitIfSignExist(text, signs[i], out firstNumber, out secondNumber))
                 {
-                    Console.WriteLine(firstNumber + " " + secondNumber);
+                    //Console.WriteLine(firstNumber + " " + secondNumber);
                     return i + 1;
                 }
             }
@@ -53,8 +53,10 @@ namespace Calculator
             // if isn't possible to parse string set operation to null 
             if (operation >= 1 && operation <= 4)
             {
-                if (!double.TryParse(aString, out a)) operation = null;
-                if (!double.TryParse(bString, out b)) operation = null;
+                if (!double.TryParse(aString, out a)) 
+                    operation = null;
+                    Console.WriteLine("");
+                if (!double.TryParse(bString, out b)) { operation = null; }
             }
             else if (operation == 5)
             {
