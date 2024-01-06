@@ -20,7 +20,7 @@ namespace LeasingCompanyProject
             StringBuilder sb = new StringBuilder();
 
             // Add header
-            sb.AppendLine("ID;Type;Brand;Model;YearOfManufacture;Color;Price;RegistrationNumber;Mileage;DurationOfService;Coefficient;CarBody;LeaseRate;MaxVelocity;MaxCargoSize");
+            sb.AppendLine("ID;Type;Brand;Model;YearOfManufacture;Color;Price;RegistrationNumber;Mileage;DurationOfService;Coefficient;CarBody;LeaseRate;MaxVelocity;MaxCargoSize;ComfortRate");
 
             // Add lines
             foreach (var vehicle in vehicles)
@@ -28,16 +28,15 @@ namespace LeasingCompanyProject
                 if (vehicle is Car)
                 {
                     var car = (Car)vehicle;
-                    sb.AppendLine($"{car.Id};Car;{car.Brand};{car.Model};{car.YearOfManufacture};{car.Color};{car.Price};{car.RegistrationNumber};{car.Mileage};{car.DurationOfService};{car.Coefficient};{car.CarBody};{car.LeaseRate};;");
+                    sb.AppendLine($"{car.Id};Car;{car.Brand};{car.Model};{car.YearOfManufacture};{car.Color};{car.Price};{car.RegistrationNumber};{car.Mileage};{car.DurationOfService};{car.Coefficient};{car.CarBody};{car.LeaseRate};;;{car.ComfortRate}");
                 }
                 else if (vehicle is Truck)
                 {
                     var truck = (Truck)vehicle;
-                    sb.AppendLine($"{truck.Id};Truck;{truck.Brand};{truck.Model};{truck.YearOfManufacture};{truck.Color};{truck.Price};{truck.RegistrationNumber};{truck.Mileage};{truck.DurationOfService};{truck.Coefficient};;;{truck.MaxVelocity};{truck.MaxCargoSize}");
+                    sb.AppendLine($"{truck.Id};Truck;{truck.Brand};{truck.Model};{truck.YearOfManufacture};{truck.Color};{truck.Price};{truck.RegistrationNumber};{truck.Mileage};{truck.DurationOfService};{truck.Coefficient};;;{truck.MaxVelocity};{truck.MaxCargoSize};{truck.ComfortRate}");
                 }
             }
 
-            Console.WriteLine( sb.ToString() );
             File.WriteAllText(PATH+fileName, sb.ToString());
             Console.WriteLine($"Changes has been saved to {fileName}");
         }
@@ -67,7 +66,8 @@ namespace LeasingCompanyProject
                         durationOfService: int.Parse(values[9]),
                         coefficient: double.Parse(values[10]),
                         carBody: values[11],
-                        leaseRate: double.Parse(values[12])
+                        leaseRate: double.Parse(values[12]),
+                        comfortRate: double.Parse(values[15])
                     );
                     vehicles.Add(car);
                 }
@@ -85,7 +85,8 @@ namespace LeasingCompanyProject
                         durationOfService: int.Parse(values[9]),
                         coefficient: double.Parse(values[10]),
                         maxVelocity: double.Parse(values[13]),
-                        maxCargoSize: double.Parse(values[14])
+                        maxCargoSize: double.Parse(values[14]),
+                        comfortRate: double.Parse(values[15])
                     );
                     vehicles.Add(truck);
                 }

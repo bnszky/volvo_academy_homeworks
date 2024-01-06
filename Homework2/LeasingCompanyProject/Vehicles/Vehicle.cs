@@ -22,6 +22,7 @@ namespace LeasingCompanyProject.Vehicles
         private int _mileage;
         private int _durationOfService;
         private double _coefficient;
+        private double _comfortRate;
         public int Mileage { 
             get { return _mileage; }
             set
@@ -53,7 +54,20 @@ namespace LeasingCompanyProject.Vehicles
             get { return _coefficient; }
         }
 
-        public Vehicle(int id, string brand, string model, int yearOfManufacture, ConsoleColor color, decimal price, string registrationNumber) {
+        public double ComfortRate
+        {
+            set
+            {
+                if (_comfortRate < 0 || _comfortRate > 10) { _comfortRate = 0; }
+                else
+                {
+                    _comfortRate = value;
+                }
+            }
+            get { return _comfortRate; }
+        }
+
+        public Vehicle(int id, string brand, string model, int yearOfManufacture, ConsoleColor color, decimal price, string registrationNumber, double comfortRate) {
             Id = id;
             Brand = brand;
             Model = model;
@@ -64,9 +78,10 @@ namespace LeasingCompanyProject.Vehicles
             Mileage = 0;
             DurationOfService = 0;
             Coefficient = 1;
+            ComfortRate = comfortRate;
         }
 
-        public Vehicle(int id, string brand, string model, int yearOfManufacture, ConsoleColor color, decimal price, string registrationNumber, int mileage, int durationOfService, double coefficient)
+        public Vehicle(int id, string brand, string model, int yearOfManufacture, ConsoleColor color, decimal price, string registrationNumber, double comfortRate, int mileage, int durationOfService, double coefficient)
         {
             Id = id;
             Brand = brand;
@@ -78,12 +93,17 @@ namespace LeasingCompanyProject.Vehicles
             Mileage = mileage;
             DurationOfService = durationOfService;
             Coefficient = coefficient;
+            ComfortRate = comfortRate;
         }
 
         public override string ToString()
         {
             return $"{Id}. {Brand} {Model} - {YearOfManufacture} - {Price}$ - {RegistrationNumber}: Mileage: {Mileage}km, In service: {DurationOfService} days, Coefficient: {Coefficient}";
         }
+
+        public abstract bool IsOutdated();
+        public abstract decimal GetCurrentPrice();
+        public abstract (bool, int) IsInspectionRequired();
 
     }
 
