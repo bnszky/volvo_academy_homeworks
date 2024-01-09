@@ -9,3 +9,27 @@ Simple calculator with set of functions:
 6. Exponentiation
 
 _I created two versions of my project + version with randoms. I tried to implement input from a string. It works well but if I have more than one minus in subtraction it crashes. So I prepared a method with "console selection" as well._
+
+## Homework 2
+System for searching for and renting cars and trucks
+Data are imported from CSV files and can be saved in CSV as well
+(You can edit the dataset for example. in Excel)
+
+All options:
+
+1. Exit
+0. Load
+1. Save
+2. Save as
+3. Write all vehicles in our fleet
+4. Write all vehicles of a specific brand
+5. Write all vehicles with an exceeded predetermined operational tenure
+6. Calculate the total value of the entire vehicle fleet
+7. Search vehicles by chosen color and brand
+8. Show all vehicles whose inspection will take place in the next 1000 km
+9. Rent a vehicle with a specific ID
+10. Write trucks that are faster than the given velocity
+11. Write trucks whose capacity is larger than the given cargo size
+12. Add new Truck
+13. Add new Car
+
