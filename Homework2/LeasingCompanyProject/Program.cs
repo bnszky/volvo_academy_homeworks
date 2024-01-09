@@ -9,7 +9,7 @@ namespace LeasingCompanyProject
 
         private static List<Vehicle> TryReadAndLoadData()
         {
-            Console.WriteLine("Please give us name of the file you would like to load");
+            Console.WriteLine("Please give us a name of the file you would like to load");
             while (true)
             {
                 fileName = Console.ReadLine();
@@ -18,7 +18,6 @@ namespace LeasingCompanyProject
                 {
                     List<Vehicle> loadedData = CSVFileManager.Load(fileName);
                     return loadedData;
-                    break;
                 }
                 catch
                 {
@@ -26,7 +25,42 @@ namespace LeasingCompanyProject
                     Console.WriteLine("Please try again");
                 }
             }
-            return null;
+        }
+
+        private static void RentVehicleWindow(Fleet fleet)
+        {
+            Console.WriteLine("Enter id of choosen vehicle");
+            if (int.TryParse(Console.ReadLine(), out int index))
+            {
+                var vehicle = fleet.FindVehicleById(index);
+                if (vehicle != null)
+                {
+                    Console.WriteLine("Enter distance in km");
+                    int.TryParse(Console.ReadLine(), out int distance);
+                    Console.WriteLine("Enter duration of rent in days");
+                    int.TryParse(Console.ReadLine(), out int durationOfTravel);
+                    decimal? rentalCost = vehicle.CalculateRentCost(distance, durationOfTravel);
+                    if (rentalCost != null)
+                    {
+                        fleet.WriteVehicleWithColor(vehicle);
+                        Console.WriteLine($"Rental cost for this car equals {rentalCost}$");
+                        Console.WriteLine("Are you sure, you want to rent this vehicle? y/n");
+                        if ((String)Console.ReadLine() == "y")
+                        {
+                            vehicle.Rent(distance, durationOfTravel);
+                        }
+
+                    }
+                }
+                else
+                {
+                    Console.WriteLine($"Vehicle with an index {index} doesn't exist");
+                }
+            }
+            else
+            {
+                Console.WriteLine("Invalid id. Please enter a number.");
+            }
         }
         private static void MenuWindow() {
             Console.WriteLine($"""
@@ -41,8 +75,11 @@ namespace LeasingCompanyProject
                 {(int)Options.WriteSpecificBrand}. Write all vehicles of specific brand
                 {(int)Options.WriteOutdated}. Write all vehicles with an exceeded a predetermined operational tenure
                 {(int)Options.CalculateTotalValue}. Calculate total value of the entire vehicle fleet
-                {(int)Options.SearchByBrandAndColor}. Search Vehicles by choosen color and brand
+                {(int)Options.SearchByBrandAndColor}. Search vehicles by choosen color and brand
                 {(int)Options.CheckInspection}. Show all vehicles whose inspection will take place in the next 1000 km
+                {(int)Options.RentVehicle}. Rent vehicle with an specific id
+                {(int)Options.WriteFastestTrucks}. Write trucks which are faster than given velocity
+                {(int)Options.WriteLargestTrucks}. Write trucks whose capacity is larger than given cargo size
                 ********************************************************************************************************
                 Enter an option:
                 """);
@@ -99,6 +136,31 @@ namespace LeasingCompanyProject
                             break;
                         case Options.CheckInspection:
                             fleet.WriteAllVehiclesWithUpcomingInspection();
+                            break;
+                        case Options.RentVehicle:
+                            RentVehicleWindow(fleet);
+                            break;
+                        case Options.WriteFastestTrucks:
+                            Console.WriteLine("Enter the lowest acceptable max velocity: ");
+                            if(int.TryParse(Console.ReadLine(), out int maxVelocity))
+                            {
+                                fleet.WriteFastestTrucks(maxVelocity);
+                            }
+                            else
+                            {
+                                Console.WriteLine("Velocity must be a number");
+                            }
+                            break;
+                        case Options.WriteLargestTrucks:
+                            Console.WriteLine("Enter the lowest acceptable cargo size: ");
+                            if (int.TryParse(Console.ReadLine(), out int maxCargoSize))
+                            {
+                                fleet.WriteLargestTrucks(maxCargoSize);
+                            }
+                            else
+                            {
+                                Console.WriteLine("Cargo size must be a number");
+                            }
                             break;
                         default:
                             Console.WriteLine("Invalid option. Please try again.");

@@ -30,24 +30,14 @@ namespace LeasingCompanyProject.Vehicles
         {
             return fleetList;
         }
-        public void AddNewVehicle(Vehicle vehicle)
-        {
-            fleetList.Add(vehicle);
-        }
 
-        public void RemoveVehicle(Vehicle vehicle)
+        public Vehicle? FindVehicleById(int index)
         {
-            fleetList.Remove(vehicle);
-        }
-
-        public void RemoveVehicleById(int index)
-        {
-            Vehicle? vehicleToRemove = fleetList.FirstOrDefault(vehicle => vehicle.Id == index);
-            if (vehicleToRemove != null) { fleetList.Remove(vehicleToRemove); }
+            return fleetList.FirstOrDefault(vehicle => vehicle.Id == index);
         }
 
         // colorful information about vehicle in terminal
-        private void WriteVehicleWithColor(Vehicle vehicle)
+        public void WriteVehicleWithColor(Vehicle vehicle)
         {
             ConsoleColor currentColor = Console.ForegroundColor;
             Console.ForegroundColor = vehicle.Color;
@@ -58,13 +48,17 @@ namespace LeasingCompanyProject.Vehicles
         }
 
         // information about vehicle without color
-        private void WriteVehicle(Vehicle vehicle)
+        public void WriteVehicle(Vehicle vehicle)
         {
             Console.WriteLine(vehicle.ToString());
         }
         public void WriteAllVehicles()
         {
             Console.WriteLine("All vehicles in our fleet: ");
+            if(fleetList.Count() == 0)
+            {
+                Console.WriteLine("Currently, we have no new vehicles");
+            }
             foreach (Vehicle vehicle in fleetList)
             {
                 // WriteVehicle(vehicle);
@@ -75,31 +69,41 @@ namespace LeasingCompanyProject.Vehicles
         public void WriteAllBrandedVehicles(String brand)
         {
             Console.WriteLine($"All Vehicles from {brand} company: ");
+            bool isInList = false;
             foreach (Vehicle vehicle in fleetList)
             {
-                if (vehicle.Brand == brand) { WriteVehicleWithColor(vehicle); }
+                if (vehicle.Brand == brand) { WriteVehicleWithColor(vehicle); isInList = true; }
             }
+            if (!isInList) Console.WriteLine($"We have no new vehicles of {brand}");
         }
 
         public void WriteAllOutdatedVehicles()
         {
+            Console.WriteLine("All vehicles with an exceeded a predetermined operational tenure: ");
+            bool isInList = false;
             foreach (Vehicle vehicle in fleetList)
             {
                 if (vehicle.IsOutdated())
                 {
                     WriteVehicleWithColor(vehicle);
+                    isInList = true;
                 }
             }
+            if (!isInList) Console.WriteLine($"All vehicles are good to rent and drive");
         }
         public void WriteAllOutdatedVehicles(String model)
         {
+            Console.WriteLine($"All {model} vehicles with an exceeded a predetermined operational tenure: ");
+            bool isInList = false;
             foreach (Vehicle vehicle in fleetList)
             {
                 if (vehicle.Model == model && vehicle.IsOutdated())
                 {
                     WriteVehicleWithColor(vehicle);
+                    isInList = true;
                 }
             }
+            if (!isInList) Console.WriteLine($"All {model} vehicles are good to rent and drive");
         }
 
         public long CalculateTotalValueOfFleet()
@@ -118,16 +122,19 @@ namespace LeasingCompanyProject.Vehicles
         public void WriteAllVehiclesWithUpcomingInspection()
         {
             Console.WriteLine("All vehicles with an upcoming inspection: ");
-            foreach(Vehicle vehicle in fleetList)
+            bool isInList = false;
+            foreach (Vehicle vehicle in fleetList)
             {
                 bool isRequired; int distanceToNextInspection;
                 (isRequired, distanceToNextInspection) = vehicle.IsInspectionRequired();
                 if (isRequired)
                 {
+                    isInList = true;
                     WriteVehicle(vehicle);
                     Console.WriteLine($"Only {distanceToNextInspection}km to next Inspection!");
                 }
             }
+            if(isInList) Console.WriteLine($"All vehicles are good to rent and drive");
         }
 
         public void SearchVehicleByBrandAndColor(String brand, ConsoleColor color)
@@ -141,6 +148,10 @@ namespace LeasingCompanyProject.Vehicles
             {
                 WriteVehicleWithColor(vehicle);
             }
+            if(vehiclesWithBestMatch.Count() == 0)
+            {
+                Console.WriteLine("We dont have this specific vehicle");
+            }
 
             // When only color or brand suit
             Console.WriteLine("But you might also like the ones below: ");
@@ -149,9 +160,44 @@ namespace LeasingCompanyProject.Vehicles
             {
                 WriteVehicleWithColor(vehicle);
             }
+            if (vehiclesWithBestMatch.Count() == 0)
+            {
+                Console.WriteLine("We have no more offerts");
+            }
         }
 
+        public void WriteFastestTrucks(int velocity)
+        {
+            Console.WriteLine("Trucks by descending velocity: ");
+            var trucks = fleetList.Where(vehicle => (vehicle is Truck) && (vehicle as Truck).MaxVelocity >= velocity).ToList();
+            trucks = trucks.OrderByDescending(truck => (truck as Truck).MaxVelocity).ToList();
 
+            if(trucks.Count == 0 ) {
+                Console.WriteLine("No truck meeting the requirements");
+            }
+
+            foreach(var truck in trucks)
+            {
+                WriteVehicleWithColor(truck);
+            }
+        }
+
+        public void WriteLargestTrucks(int cargoSize)
+        {
+            Console.WriteLine("Trucks by descending cargo size: ");
+            var trucks = fleetList.Where(vehicle => (vehicle is Truck) && (vehicle as Truck).MaxCargoSize >= cargoSize).ToList();
+            trucks = trucks.OrderByDescending(truck => (truck as Truck).MaxCargoSize).ToList();
+
+            if (trucks.Count == 0)
+            {
+                Console.WriteLine("No truck meeting the requirements");
+            }
+
+            foreach (var truck in trucks)
+            {
+                WriteVehicleWithColor(truck);
+            }
+        }
 
     }
 }

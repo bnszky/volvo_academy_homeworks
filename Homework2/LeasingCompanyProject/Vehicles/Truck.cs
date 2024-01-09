@@ -48,6 +48,11 @@ namespace LeasingCompanyProject.Vehicles
             bool isServiceRequired = (distanceFromLastService >= 14000);
             return (isServiceRequired, 15000 - distanceFromLastService); // return additionally distance to next service
         }
+
+        protected override double CalculateSpecificCoefficientForVehicle()
+        {
+            return (double)MaxCargoSize / 10 * (double)MaxVelocity / 80 * Coefficient;
+        }
     }
 
 }

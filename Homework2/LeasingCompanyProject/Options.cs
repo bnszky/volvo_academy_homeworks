@@ -17,6 +17,9 @@ namespace LeasingCompanyProject
         WriteOutdated,
         CalculateTotalValue,
         SearchByBrandAndColor,
-        CheckInspection
+        CheckInspection,
+        RentVehicle,
+        WriteFastestTrucks,
+        WriteLargestTrucks
     }
 }

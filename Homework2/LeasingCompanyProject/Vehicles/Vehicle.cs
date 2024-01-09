@@ -96,6 +96,36 @@ namespace LeasingCompanyProject.Vehicles
             ComfortRate = comfortRate;
         }
 
+        public void Rent(int distance, int durationOfTravel)
+        {
+            if(distance > 0 && durationOfTravel > 0) {
+                Mileage += distance;
+                DurationOfService += durationOfTravel;
+                Console.WriteLine($"{Id}. {Brand} {Model} has been rented for {distance}km within {durationOfTravel} days!");
+            }
+            else
+            {
+                Console.WriteLine("Distance and duration must be positive values!");
+            }
+        }
+
+        public decimal? CalculateRentCost(int distance, int durationOfTravel)
+        {
+            if (distance > 0 && durationOfTravel > 0)
+            {
+                decimal rentalCost = (decimal)durationOfTravel / 30 * (Price * (decimal)0.03); // One month costs 3% price of vehicle
+                rentalCost += (decimal)distance / 20000 * Price * (decimal)0.02; // Each 20000km increase rentalCost by 2% price of vehicle
+                rentalCost *= (decimal)CalculateSpecificCoefficientForVehicle();
+                return rentalCost;
+            }
+            else
+            {
+                Console.WriteLine("Distance and duration must be positive values!");
+                return null;
+            }
+        }
+        protected abstract double CalculateSpecificCoefficientForVehicle();
+
         public override string ToString()
         {
             return $"{Id}. {Brand} {Model} - {YearOfManufacture} - {Price}$ - {RegistrationNumber}: Mileage: {Mileage}km, In service: {DurationOfService} days, Coefficient: {Coefficient}";
