@@ -30,4 +30,6 @@ All options:
 9. Rent a vehicle with a specific ID
 10. Write trucks that are faster than the given velocity
 11. Write trucks whose capacity is larger than the given cargo size
+12. Add new Truck
+13. Add new Car
 
