@@ -21,6 +21,11 @@ namespace LeasingCompanyProject.Vehicles
             this.fleetList = fleetList;
         }
 
+        public void AddNewVehicle(Vehicle vehicle)
+        {
+            this.fleetList.Add(vehicle);
+        }
+
         public void SetNewFleetList(List<Vehicle> fleetList)
         {
             this.fleetList = fleetList;

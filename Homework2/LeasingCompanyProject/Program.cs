@@ -5,7 +5,7 @@ namespace LeasingCompanyProject
 {
     internal class Program
     {
-        private static string fileName = "vehicles.csv";
+        private static string fileName = "";
 
         private static List<Vehicle> TryReadAndLoadData()
         {
@@ -72,14 +72,16 @@ namespace LeasingCompanyProject
                 {(int)Options.Save}. Save
                 {(int)Options.SaveAs}. Save as
                 {(int)Options.WriteAll}. Write all vehicles in our fleet
-                {(int)Options.WriteSpecificBrand}. Write all vehicles of specific brand
-                {(int)Options.WriteOutdated}. Write all vehicles with an exceeded a predetermined operational tenure
-                {(int)Options.CalculateTotalValue}. Calculate total value of the entire vehicle fleet
-                {(int)Options.SearchByBrandAndColor}. Search vehicles by choosen color and brand
+                {(int)Options.WriteSpecificBrand}. Write all vehicles of a specific brand
+                {(int)Options.WriteOutdated}. Write all vehicles with an exceeded predetermined operational tenure
+                {(int)Options.CalculateTotalValue}. Calculate the total value of the entire vehicle fleet
+                {(int)Options.SearchByBrandAndColor}. Search vehicles by chosen color and brand
                 {(int)Options.CheckInspection}. Show all vehicles whose inspection will take place in the next 1000 km
-                {(int)Options.RentVehicle}. Rent vehicle with an specific id
-                {(int)Options.WriteFastestTrucks}. Write trucks which are faster than given velocity
-                {(int)Options.WriteLargestTrucks}. Write trucks whose capacity is larger than given cargo size
+                {(int)Options.RentVehicle}. Rent a vehicle with a specific id
+                {(int)Options.WriteFastestTrucks}. Write trucks that are faster than the given velocity
+                {(int)Options.WriteLargestTrucks}. Write trucks whose capacity is larger than the given cargo size
+                {(int)Options.AddTruck}. Add new Truck
+                {(int)Options.AddCar}. Add new Car
                 ********************************************************************************************************
                 Enter an option:
                 """);
@@ -87,8 +89,8 @@ namespace LeasingCompanyProject
         static void Main(string[] args)
         {
             Console.WriteLine("We're really glad to see you again!");
-            //var loadedData = TryReadAndLoadData();
-            var loadedData = CSVFileManager.Load(fileName);
+            var loadedData = TryReadAndLoadData();
+            //var loadedData = CSVFileManager.Load(fileName);
 
             Fleet fleet = new Fleet(loadedData);
 
@@ -160,6 +162,22 @@ namespace LeasingCompanyProject
                             else
                             {
                                 Console.WriteLine("Cargo size must be a number");
+                            }
+                            break;
+                        case Options.AddTruck:
+                            var truck = ConsoleVehicleCreator.CreateTruck();
+                            if (truck != null)
+                            {
+                                fleet.AddNewVehicle(truck);
+                                Console.WriteLine($"{truck.Id}. {truck.Brand} {truck.Model} has been added!");
+                            }
+                            break;
+                        case Options.AddCar:
+                            var car = ConsoleVehicleCreator.CreateCar();
+                            if (car != null)
+                            {
+                                fleet.AddNewVehicle(car);
+                                Console.WriteLine($"{car.Id}. {car.Brand} {car.Model} has been added!");
                             }
                             break;
                         default:

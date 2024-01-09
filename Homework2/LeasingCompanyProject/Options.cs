@@ -20,6 +20,8 @@ namespace LeasingCompanyProject
         CheckInspection,
         RentVehicle,
         WriteFastestTrucks,
-        WriteLargestTrucks
+        WriteLargestTrucks,
+        AddTruck,
+        AddCar
     }
 }
