@@ -28,12 +28,12 @@ namespace LeasingCompanyProject
                 if (vehicle is Car)
                 {
                     var car = (Car)vehicle;
-                    sb.AppendLine($"{car.Id};Car;{car.Brand};{car.Model};{car.YearOfManufacture};{car.Color};{car.Price};{car.RegistrationNumber};{car.Mileage};{car.DurationOfService};{car.Coefficient};{car.CarBody};{car.LeaseRate};;;{car.ComfortRate}");
+                    sb.AppendLine($"{car.Id};Car;{car.Brand};{car.Model};{car.YearOfManufacture};{car.Color};{car.Price};{car.RegistrationNumber};{car.Mileage};{car.DurationOfService};{car.SpecificModelCoefficient};{car.CarBody};{car.LeaseRate};;;{car.ComfortRate}");
                 }
                 else if (vehicle is Truck)
                 {
                     var truck = (Truck)vehicle;
-                    sb.AppendLine($"{truck.Id};Truck;{truck.Brand};{truck.Model};{truck.YearOfManufacture};{truck.Color};{truck.Price};{truck.RegistrationNumber};{truck.Mileage};{truck.DurationOfService};{truck.Coefficient};;;{truck.MaxVelocity};{truck.MaxCargoSize};{truck.ComfortRate}");
+                    sb.AppendLine($"{truck.Id};Truck;{truck.Brand};{truck.Model};{truck.YearOfManufacture};{truck.Color};{truck.Price};{truck.RegistrationNumber};{truck.Mileage};{truck.DurationOfService};{truck.SpecificModelCoefficient};;;{truck.MaxVelocity};{truck.MaxCargoSize};{truck.ComfortRate}");
                 }
             }
 

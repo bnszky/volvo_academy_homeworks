@@ -19,8 +19,6 @@ namespace LeasingCompanyProject
         SearchByBrandAndColor,
         CheckInspection,
         RentVehicle,
-        WriteFastestTrucks,
-        WriteLargestTrucks,
         AddTruck,
         AddCar
     }

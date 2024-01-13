@@ -41,7 +41,7 @@ namespace LeasingCompanyProject.Vehicles
                 else { _durationOfService = value; }
             }
         }
-        public double Coefficient
+        public double SpecificModelCoefficient // specific coefficient for model (for example coefficient = 1.2 => currentPrice = 1.2*price)
         {
             set 
             { 
@@ -77,7 +77,7 @@ namespace LeasingCompanyProject.Vehicles
             RegistrationNumber = registrationNumber;
             Mileage = 0;
             DurationOfService = 0;
-            Coefficient = 1;
+            SpecificModelCoefficient = 1;
             ComfortRate = comfortRate;
         }
 
@@ -92,20 +92,20 @@ namespace LeasingCompanyProject.Vehicles
             RegistrationNumber = registrationNumber;
             Mileage = mileage;
             DurationOfService = durationOfService;
-            Coefficient = coefficient;
+            SpecificModelCoefficient = coefficient;
             ComfortRate = comfortRate;
         }
 
-        public void Rent(int distance, int durationOfTravel)
+        public String Rent(int distance, int durationOfTravel)
         {
             if(distance > 0 && durationOfTravel > 0) {
                 Mileage += distance;
                 DurationOfService += durationOfTravel;
-                Console.WriteLine($"{Id}. {Brand} {Model} has been rented for {distance}km within {durationOfTravel} days!");
+                return $"{Id}. {Brand} {Model} has been rented for {distance}km within {durationOfTravel} days!";
             }
             else
             {
-                Console.WriteLine("Distance and duration must be positive values!");
+                return "Distance and duration must be positive values!";
             }
         }
 
@@ -120,7 +120,6 @@ namespace LeasingCompanyProject.Vehicles
             }
             else
             {
-                Console.WriteLine("Distance and duration must be positive values!");
                 return null;
             }
         }
@@ -128,7 +127,7 @@ namespace LeasingCompanyProject.Vehicles
 
         public override string ToString()
         {
-            return $"{Id}. {Brand} {Model} - {YearOfManufacture} - {Price}$ - {RegistrationNumber}: Mileage: {Mileage}km, In service: {DurationOfService} days, Coefficient: {Coefficient}";
+            return $"{Id}. {Brand} {Model} - {YearOfManufacture} - {Price}$ - {RegistrationNumber}: Mileage: {Mileage}km, In service: {DurationOfService} days, Coefficient: {SpecificModelCoefficient}";
         }
 
         public abstract bool IsOutdated();

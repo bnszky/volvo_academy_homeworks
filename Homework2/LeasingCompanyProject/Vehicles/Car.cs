@@ -60,7 +60,7 @@ namespace LeasingCompanyProject.Vehicles
 
         protected override double CalculateSpecificCoefficientForVehicle()
         {
-            return LeaseRate * Coefficient;
+            return LeaseRate * SpecificModelCoefficient;
         }
     }
 }

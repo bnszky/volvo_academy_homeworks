@@ -51,7 +51,7 @@ namespace LeasingCompanyProject.Vehicles
 
         protected override double CalculateSpecificCoefficientForVehicle()
         {
-            return (double)MaxCargoSize / 10 * (double)MaxVelocity / 80 * Coefficient;
+            return (double)MaxCargoSize / 10 * (double)MaxVelocity / 80 * SpecificModelCoefficient;
         }
     }
 
