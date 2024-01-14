@@ -1,4 +1,5 @@
-﻿using LeasingCompanyProject.Vehicles;
+﻿using LeasingCompanyProject.CargoTransportStrategies;
+using LeasingCompanyProject.Vehicles;
 using System.Drawing;
 
 namespace LeasingCompanyProject
@@ -132,6 +133,12 @@ namespace LeasingCompanyProject
                                 fleet.AddNewVehicle(car);
                                 Console.WriteLine($"{car.Id}. {car.Brand} {car.Model} has been added!");
                             }
+                            break;
+                        case Options.CargoOrder:
+                            ConsoleManager.TryCargoOrder(fleet, new CargoStandardOrder());
+                            break;
+                        case Options.CargoOrderWithDiscount:
+                            ConsoleManager.TryCargoOrder(fleet, new CargoOrderWithDiscount());
                             break;
                         default:
                             Console.WriteLine("Invalid option. Please try again.");

@@ -20,6 +20,8 @@ namespace LeasingCompanyProject
         CheckInspection,
         RentVehicle,
         AddTruck,
-        AddCar
+        AddCar,
+        CargoOrder,
+        CargoOrderWithDiscount
     }
 }
