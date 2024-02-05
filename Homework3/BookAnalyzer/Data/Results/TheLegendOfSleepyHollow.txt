@@ -1,0 +1,146 @@
+The Longest Sentence by number of characters: In one corner
+stood a huge bag of wool, ready to be spun; in another, a quantity of
+linsey-woolsey just from the loom; ears of Indian corn, and strings of
+dried apples and peaches, hung in gay festoons along the walls, mingled
+with the gaud of red peppers; and a door left ajar gave him a peep into
+the best parlor, where the claw-footed chairs and dark mahogany tables
+shone like mirrors; andirons, with their accompanying shovel and
+tongs, glistened from their covert of asparagus tops; mock-oranges and
+conch-shells decorated the mantelpiece; strings of various-colored birds
+eggs were suspended above it; a great ostrich egg was hung from
+the centre of the room, and a corner cupboard, knowingly left open,
+displayed immense treasures of old silver and well-mended china.
+The Shortest Sentence by number of words: POSTSCRIPT.
+The Longest Word: chastisement
+Top 10 most occurance of characters: 
+1. e 98
+2. t 86
+3. a 65
+4. i 62
+5. s 61
+6. o 59
+7. n 54
+8. h 52
+9. l 43
+10. r 42
+Most often words: 
+the 12
+a 12
+to 10
+and 6
+of 5
+his 5
+he 4
+it 4
+by 3
+that 3
+for 3
+but 3
+hand 2
+story 2
+was 2
+glass 2
+as 2
+is 2
+in 2
+we 2
+legend 1
+sleepy 1
+hollow 1
+washington 1
+irving 1
+all 1
+this 1
+called 1
+doing 1
+duty 1
+their 1
+parents 1
+never 1
+inflicted 1
+chastisement 1
+without 1
+following 1
+assurance 1
+so 1
+consolatory 1
+smarting 1
+urchin 1
+would 1
+remember 1
+thank 1
+him 1
+longest 1
+day 1
+had 1
+live 1
+hospitable 1
+attentions 1
+were 1
+brief 1
+expressive 1
+being 1
+confined 1
+shake 1
+slap 1
+on 1
+shoulder 1
+loud 1
+laugh 1
+pressing 1
+invitation 1
+fall 1
+help 1
+themselves 1
+teller 1
+who 1
+just 1
+putting 1
+wine 1
+lips 1
+refreshment 1
+after 1
+toils 1
+paused 1
+moment 1
+looked 1
+at 1
+inquirer 1
+with 1
+an 1
+air 1
+infinite 1
+deference 1
+lowering 1
+slowly 1
+table 1
+observed 1
+intended 1
+most 1
+logically 1
+prove 1
+there 1
+no 1
+situation 1
+life 1
+has 1
+its 1
+advantages 1
+pleasures 1
+provided 1
+will 1
+take 1
+joke 1
+find 1
+ergo 1
+country 1
+schoolmaster 1
+be 1
+refused 1
+dutch 1
+heiress 1
+certain 1
+step 1
+high 1
+preferment 1
+state 1

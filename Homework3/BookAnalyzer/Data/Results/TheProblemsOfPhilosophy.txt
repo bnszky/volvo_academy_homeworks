@@ -1,0 +1,230 @@
+The Longest Sentence by number of characters: Thus, to sum up our discussion of the value of philosophy; Philosophy
+is to be studied, not for the sake of any definite answers to its
+questions, since no definite answers can, as a rule, be known to be
+true, but rather for the sake of the questions themselves; because
+these questions enlarge our conception of what is possible, enrich
+our intellectual imagination and diminish the dogmatic assurance which
+closes the mind against speculation; but above all because, through the
+greatness of the universe which philosophy contemplates, the mind also
+is rendered great, and becomes capable of that union with the universe
+which constitutes its highest good.
+The Shortest Sentence by number of words: PREFACE
+
+The Longest Word: BIBLIOGRAPHICAL
+Top 10 most occurance of characters: 
+1. e 272
+2. t 198
+3. a 169
+4. o 167
+5. n 158
+6. i 149
+7. s 129
+8. h 122
+9. r 116
+10. l 78
+Most often words: 
+the 36
+of 32
+and 15
+a 14
+be 13
+is 12
+in 9
+that 8
+knowledge 8
+to 7
+by 6
+as 6
+are 6
+we 5
+on 5
+thing 5
+sort 5
+associated 5
+b 5
+which 4
+therefore 4
+two 4
+been 4
+with 4
+our 4
+law 4
+you 4
+philosophy 3
+they 3
+can 3
+principle 3
+may 3
+has 3
+found 3
+other 3
+greater 3
+cases 3
+will 3
+one 3
+general 3
+says 3
+was 3
+15th 3
+_the 3
+problems 2
+bertrand 2
+russell 2
+whatever 2
+thought 2
+it 2
+nothing 2
+inconceivable 2
+matter 2
+between 2
+or 2
+parts 2
+follows 2
+certain 2
+number 2
+them 2
+known 2
+probable 2
+admit 2
+yesterday 2
+day 2
+must 2
+16th 2
+yes 2
+1 2
+not 2
+able 2
+universals 2
+produced 1
+gordon 1
+keener 1
+preface 1
+1912 1
+appearance 1
+reality 1
+might 1
+state 1
+argument 1
+support 1
+their 1
+view 1
+some 1
+such 1
+way 1
+this 1
+an 1
+idea 1
+mind 1
+person 1
+thinking 1
+except 1
+ideas 1
+minds 1
+anything 1
+else 1
+what 1
+cannot 1
+exist 1
+existence 1
+nature 1
+idealism 1
+distinction 1
+involved 1
+roughly 1
+_savoir_ 1
+_connaître_ 1
+french 1
+_wissen_ 1
+_kennen_ 1
+german 1
+acquaintance 1
+description 1
+induction 1
+examining 1
+called 1
+_principle 1
+induction_ 1
+its 1
+stated 1
+when 1
+never 1
+dissociated 1
+from 1
+have 1
+probability 1
+fresh 1
+case 1
+present 1
+repeat 1
+regards 1
+thus 1
+more 1
+if 1
+no 1
+failure 1
+association 1
+always 1
+principles 1
+at 1
+least 1
+_if_ 1
+i 1
+know 1
+first 1
+continues 1
+because 1
+dined 1
+jones 1
+your 1
+diary 1
+tell 1
+second 1
+_is_ 1
+identity_ 1
+2 1
+contradiction_ 1
+both 1
+3 1
+excluded 1
+middle_ 1
+everything 1
+either 1
+but 1
+soon 1
+divest 1
+thoughts 1
+irrelevant 1
+particularity 1
+become 1
+see 1
+four 1
+any 1
+instance 1
+seen 1
+_typical_ 1
+examination 1
+instances 1
+becomes 1
+unnecessary 1
+how 1
+_a 1
+priori_ 1
+possible 1
+world 1
+intuitive 1
+truth 1
+falsehood 1
+error 1
+opinion 1
+limits 1
+philosophical 1
+value 1
+bibliographical 1
+note 1
+following 1
+specially 1
+recommended 1
+end 1
+project 1
+gutenberg 1
+s 1
