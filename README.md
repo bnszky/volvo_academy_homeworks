@@ -28,8 +28,8 @@ All options:
 7. Search vehicles by chosen color and brand
 8. Show all vehicles whose inspection will take place in the next 1000 km
 9. Rent a vehicle with a specific ID
-10. Write trucks that are faster than the given velocity
-11. Write trucks whose capacity is larger than the given cargo size
 12. Add new Truck
 13. Add new Car
+14. Order cargo (500$ for 1 ton)
+15. Order cargo (400$ for 1 ton, 10 tons for free if you order more than 14 tons weight)
 
