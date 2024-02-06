@@ -57,6 +57,7 @@ namespace BookAnalyzer
                     book.WriteData(RESULT_PATH);
                 }));
             }
+            await Task.WhenAll(tasks);
         }
 
         // Run algorithm for only one book
@@ -78,6 +79,12 @@ namespace BookAnalyzer
         public static void ClearResults()
         {
             if (Directory.Exists(RESULT_PATH)) { Directory.Delete(RESULT_PATH, true); }
+            AllBookStatsHandler.Init();
+        }
+
+        public static void WriteInfoAboutAllFiles()
+        {
+            AllBookStatsHandler.WriteDataToFile(RESULT_PATH + "\\AllBookStats.txt");
         }
     }
 }

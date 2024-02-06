@@ -125,5 +125,19 @@ namespace BookAnalyzer
             return dict.OrderByDescending(pair => pair.Value).ToDictionary(pair => pair.Key, pair => pair.Value);
         }
 
+        public static void AddToDictionary<TKey>(Dictionary<TKey, int> dict1, Dictionary<TKey, int> dict2){
+            foreach(var pair in dict2)
+            {
+                if (dict1.ContainsKey(pair.Key))
+                {
+                    dict1[pair.Key] += pair.Value;
+                }
+                else
+                {
+                    dict1.Add(pair.Key, pair.Value);
+                }
+            }
+        }
+
     }
 }

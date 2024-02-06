@@ -2,6 +2,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -14,6 +15,7 @@ namespace BookAnalyzer.Models
 {
     public class Book
     {
+        private static object lockObject = new object();
         public int Id { get; }
         private string source;
         public BookInfo info { get; set; }
@@ -73,6 +75,15 @@ namespace BookAnalyzer.Models
             Console.WriteLine($"Book {info.Title} #{Id} has been initialized");
         }
         public void Read() {
+
+            Stopwatch stopwatch = new Stopwatch();
+
+            stopwatch.Start();
+
+            List<string> sentences = new List<string>();
+            List<string> words = new List<string>();
+            List<string> punctuation = new List<string>();
+
             using (StreamReader sr = new StreamReader(source))
             {
                 string line;
@@ -91,7 +102,12 @@ namespace BookAnalyzer.Models
 
                         if (paragraph.Length > 0)
                         {
-                            ParagraphParser.Run(paragraph);
+                            (sentences, words, punctuation) = ParagraphParser.Run(paragraph);
+                            WordHandler.FindLongestSentenceByNumberOfCharacters(sentences, longestSentencesByNumberOfCharacters);
+                            WordHandler.FindShortestSentenceByNumberOfWords(sentences, shortestSentencesByNumberOfWords);
+                            WordHandler.FindLongestWord(words, longestWords);
+                            WordHandler.AddWords(words, wordCounts);
+                            WordHandler.AddCharacters(words, characterCounts);
                             paragraph.Clear();
                         }
 
@@ -104,9 +120,6 @@ namespace BookAnalyzer.Models
                         {
                             if (paragraph.Length > 0)
                             {
-                                List<string> sentences = new List<string>();
-                                List<string> words = new List<string>();
-                                List<string> punctuation = new List<string>();
                                 (sentences, words, punctuation) = ParagraphParser.Run(paragraph);
                                 WordHandler.FindLongestSentenceByNumberOfCharacters(sentences, longestSentencesByNumberOfCharacters);
                                 WordHandler.FindShortestSentenceByNumberOfWords(sentences, shortestSentencesByNumberOfWords);
@@ -123,7 +136,22 @@ namespace BookAnalyzer.Models
                     }
                 }
             }
-            Console.WriteLine($"Book \"{info.Title}\" has been read");
+
+            lock (lockObject)
+            {
+                WordHandler.FindLongestSentenceByNumberOfCharacters(longestSentencesByNumberOfCharacters.ToList(), AllBookStatsHandler.longestSentencesByNumberOfCharacters);
+                WordHandler.FindShortestSentenceByNumberOfWords(shortestSentencesByNumberOfWords.ToList(), AllBookStatsHandler.shortestSentencesByNumberOfWords);
+                WordHandler.FindLongestWord(longestWords.ToList(), AllBookStatsHandler.longestWords);
+                WordHandler.AddToDictionary(AllBookStatsHandler.characterCounts, characterCounts);
+                WordHandler.AddToDictionary(AllBookStatsHandler.wordCounts, wordCounts);
+            }
+
+            stopwatch.Stop();
+
+            TimeSpan ts = stopwatch.Elapsed;
+            double seconds = ts.TotalSeconds;
+
+            Console.WriteLine($"Book \"{info.Title}\" has been read in {seconds:F4} seconds");
         }
         public void WriteData(String destination)
         {
