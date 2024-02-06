@@ -33,3 +33,9 @@ All options:
 14. Order cargo (500$ for 1 ton)
 15. Order cargo (400$ for 1 ton, 10 tons for free if you order more than 14 tons weight)
 
+## Homework 3
+Algorithm tries to parse all books in a parallel.
+Dividing book into smaller parts (paragraphs) and searching longest words, sentences and others.
+
+All useful data are stored in a file with a title of the book (written with PascalCase)
+Sumamrized data from all books are stored in a file with a name "AllBookStats.txt"
