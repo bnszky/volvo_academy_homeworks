@@ -13,23 +13,14 @@ namespace BookAnalyzer
         {
             List<String> sentences, words;
             words = new List<String>();
-            //Console.WriteLine(text.ToString());
+
+            MatchCollection wordMatches = Regex.Matches(text.ToString(), @"[\p{L}0-9']+");
+            foreach (Match word in wordMatches) { words.Add(word.Value.ToLower()); }
 
             sentences = Regex.Split(text.ToString(), @"(?<=[\.!\?])\s+").ToList();
 
-            foreach ( var sentence in sentences)
-            {
-                sentence.Trim();
-
-                words = Regex.Split(sentence, @"\W+").ToList();
-                words = words.Where(word => !string.IsNullOrEmpty(word)).ToList();
-
-                //MatchCollection punctuation = Regex.Matches(sentence, @"\p{P}");
-                //foreach ( var xd in punctuation) {
-                //    Console.WriteLine(xd);
-                //}
-            }
-
+            sentences = sentences.Where(sentence => !string.IsNullOrEmpty(sentence) && Regex.IsMatch(sentence, @"\p{L}[?.!]$") && !Regex.IsMatch(sentence, @"[I|V|X|L|C|D|M]\.") && WordHandler.GetNumberOfWordsFromSentence(sentence) >= 3).ToList();
+ 
             return new Tuple<List<String>, List<String>, List<String>>(sentences, words, words);
         }
     }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BookAnalyzer.Comparers;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
@@ -17,9 +18,9 @@ namespace BookAnalyzer.Models
         private string source;
         public BookInfo info { get; set; }
 
-        private String longestSentenceByNumberOfCharacters;
-        private String shortestSentenceByNumberOfWords;
-        private String longestWord;
+        private SortedSet<String> longestSentencesByNumberOfCharacters;
+        private SortedSet<String> shortestSentencesByNumberOfWords;
+        private SortedSet<String> longestWords;
         private Dictionary<String, int> wordCounts;
         private Dictionary<char, int> characterCounts;
 
@@ -54,6 +55,9 @@ namespace BookAnalyzer.Models
         public Book(string _source) { 
             wordCounts = new Dictionary<string, int> ();
             characterCounts = new Dictionary<char, int> ();
+            longestSentencesByNumberOfCharacters = new SortedSet<string> (new StringLengthComparer());
+            longestWords = new SortedSet<string> (new StringLengthComparer());
+            shortestSentencesByNumberOfWords = new SortedSet<string> (new SentenceByNumberOfWordsComparer());
 
             source = _source;
 
@@ -104,9 +108,9 @@ namespace BookAnalyzer.Models
                                 List<string> words = new List<string>();
                                 List<string> punctuation = new List<string>();
                                 (sentences, words, punctuation) = ParagraphParser.Run(paragraph);
-                                WordHandler.FindLongestSentenceByNumberOfCharacters(sentences, ref longestSentenceByNumberOfCharacters);
-                                WordHandler.FindShortestSentenceByNumberOfWords(sentences, ref shortestSentenceByNumberOfWords);
-                                WordHandler.FindLongestWord(words, ref longestWord);
+                                WordHandler.FindLongestSentenceByNumberOfCharacters(sentences, longestSentencesByNumberOfCharacters);
+                                WordHandler.FindShortestSentenceByNumberOfWords(sentences, shortestSentencesByNumberOfWords);
+                                WordHandler.FindLongestWord(words, longestWords);
                                 WordHandler.AddWords(words, wordCounts);
                                 WordHandler.AddCharacters(words, characterCounts);
                                 paragraph.Clear();
@@ -131,11 +135,34 @@ namespace BookAnalyzer.Models
 
             using (StreamWriter sw = File.AppendText(path))
             {
-                sw.WriteLine($"The Longest Sentence by number of characters: {longestSentenceByNumberOfCharacters}");
-                sw.WriteLine($"The Shortest Sentence by number of words: {shortestSentenceByNumberOfWords}");
-                sw.WriteLine($"The Longest Word: {longestWord}");
+                int index = 0;
+
+                sw.WriteLine($"\nTop 10 Longest Sentences by number of characters: ");
+                
+                foreach (var sentence in longestSentencesByNumberOfCharacters.Reverse()) {
+                    sw.WriteLine($"{++index}. {sentence}");
+                }
+
+                index = 0;
+
+                sw.WriteLine($"\nTop 10 Shortest Sentences by number of words: ");
+
+                foreach (var sentence in shortestSentencesByNumberOfWords)
+                {
+                    sw.WriteLine($"{++index}. {sentence}");
+                }
+
+                index = 0;
+
+                sw.WriteLine($"\nThe 10 Longest Words: ");
+
+                foreach (var word in longestWords.Reverse())
+                {
+                    sw.WriteLine($"{++index}. {word}");
+                }
+
                 int count = 0;
-                sw.WriteLine("Top 10 most occurance of characters: ");
+                sw.WriteLine("\nTop 10 most characters: ");
                 foreach(var pair in sortedCharacters)
                 {
                     if (count >= 10) break;
@@ -143,7 +170,7 @@ namespace BookAnalyzer.Models
 
                     sw.WriteLine($"{count}. {pair.Key} {pair.Value}");
                 }
-                sw.WriteLine("Most often words: ");
+                sw.WriteLine("\nMost often words: ");
                 foreach (var pair in sortedWords)
                 {
                     sw.WriteLine(pair.Key + " " + pair.Value);

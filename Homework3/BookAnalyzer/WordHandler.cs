@@ -11,54 +11,58 @@ namespace BookAnalyzer
 {
     public static class WordHandler
     {
-        public static void FindLongestSentenceByNumberOfCharacters(List<String> sentences, ref String currentLongestSentence)
+        public static void FindLongestSentenceByNumberOfCharacters(List<String> sentences, SortedSet<String> currentLongestSentences)
         {
             foreach (String sentence in sentences)
             {
-                if (currentLongestSentence == null || sentence.Length > currentLongestSentence.Length) {
-                    currentLongestSentence = sentence;
+                if(currentLongestSentences.Count == 10 && sentence.Length > currentLongestSentences.Min.Length)
+                {
+                    currentLongestSentences.Remove(currentLongestSentences.Min);
+                    currentLongestSentences.Add(sentence);
+                }
+                else if(currentLongestSentences.Count < 10)
+                {
+                    currentLongestSentences.Add(sentence);
                 }
             }
         }
 
-        public static void FindShortestSentenceByNumberOfWords(List<String> sentences, ref String currentShortestSentence)
+        public static int GetNumberOfWordsFromSentence(String sentence)
         {
-            int currentShortestSentenceNumberOfWords = -1;
-            if (currentShortestSentence != null)
-            {
-                var _words = Regex.Split(currentShortestSentence, @"\W+").ToList();
-                _words = _words.Where(word => !string.IsNullOrEmpty(word)).ToList();
-                currentShortestSentenceNumberOfWords = _words.Count(); 
-            }
-            foreach (String sentence in sentences)
-            {
-                //Console.WriteLine(sentence);
-                //Console.WriteLine(currentShortestSentence==null ? "NULL" : currentShortestSentence);
-                var words = Regex.Split(sentence, @"\W+").ToList();
-                words = words.Where(word => !string.IsNullOrEmpty(word)).ToList();
-                int numberOfWords = words.Count();
+            if(sentence == null || sentence.Length == 0) return 0;
 
-                //foreach (var word in words)
-                //{
-                //    Console.WriteLine(word);
-                //}
-                //Console.WriteLine(numberOfWords);
-                //Console.ReadKey();
-                if((currentShortestSentenceNumberOfWords == -1 || numberOfWords < currentShortestSentenceNumberOfWords) && numberOfWords > 0)
+            MatchCollection wordMatches = Regex.Matches(sentence, @"[\p{L}0-9']+");
+            return wordMatches.Count;
+        }
+
+        public static void FindShortestSentenceByNumberOfWords(List<String> sentences, SortedSet<String> currentShortestSentences)
+        {
+            foreach(String sentence in sentences)
+            {
+                if(currentShortestSentences.Count == 10 && GetNumberOfWordsFromSentence(currentShortestSentences.Max) > GetNumberOfWordsFromSentence(sentence))
                 {
-                    currentShortestSentenceNumberOfWords = numberOfWords;
-                    currentShortestSentence = sentence;
+                    currentShortestSentences.Remove(currentShortestSentences.Max);
+                    currentShortestSentences.Add(sentence);
+                }
+                else if(currentShortestSentences.Count < 10)
+                {
+                    currentShortestSentences.Add(sentence);
                 }
             }
         }
 
-        public static void FindLongestWord(List<String> words, ref String longestWord)
+        public static void FindLongestWord(List<String> words, SortedSet<String> longestWords)
         {
-            foreach(String word in words)
+            foreach (String word in words)
             {
-                if(longestWord == null || word.Length > longestWord.Length)
+                if (longestWords.Count == 10 && word.Length > longestWords.Min.Length)
                 {
-                    longestWord = word;
+                    longestWords.Remove(longestWords.Min);
+                    longestWords.Add(word);
+                }
+                else if(longestWords.Count < 10)
+                {
+                    longestWords.Add(word);
                 }
             }
         }
